@@ -392,8 +392,16 @@ public class Scanner {
 
             }
         else
-        {
-            t.kind = Token.IDENT;
+        {   
+            int i = t.str.Length;
+            if(t.str.Substring(i-1) == "_")
+            {
+                    Parser.Errors.Error("Los identificadores no pueden finalizar con '_' ");
+            }
+            else{
+                t.kind = Token.IDENT;
+            }
+            
         }
         
     }
