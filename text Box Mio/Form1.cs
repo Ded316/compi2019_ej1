@@ -35,9 +35,14 @@ namespace at.jku.ssw.cc //Compilador //text_Box_Mio
             InitializeComponent();
             instContinuar = new text_Box_Mio.continuar();
             //  inicializa();
+            
+            /* 5/9/19 configuracion para habilitar el shortcut para Inspeccionar-> Arbol de derivacion. Realizado por ded316 (Daniel E Diaz reg 17589) */
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(árbolDeDerivaciónToolStripMenuItem_KeyDown);
+
 
         }
-
+        
         private void button1_Click(object sender, EventArgs e) //muestra Vars Locs
         {
             Parser.muestraVarsLocales();
@@ -1195,6 +1200,33 @@ namespace at.jku.ssw.cc //Compilador //text_Box_Mio
             else pestania.SelectTab(a.Name);
         }
 
+        /* -configuracion del shortcut- para que con " Ctrl + I "
+         * se active Inspeccionar-> Arbol de derivacion.
+         * 
+         * -ERROR a corregir: el cursor no debe estar en el editor de codigo al aplicar el shortcut
+         * 
+         * Realizado por ded316 (Daniel E Diaz reg 17589) el 5/9/19 */
+         
+        private void árbolDeDerivaciónToolStripMenuItem_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if(e.Control && e.KeyCode == Keys.I)
+            {
+                Parser.muestraProducciones = true;
+                Parser.muestraCargaDeInstrs = Tab.muestraTabSimb = false;
+                tabControl1.SelectedIndex = 0;
+                treeView1.Nodes.Clear();
+                inicializa();
+                compilar();
+                //Parser.muestraProducciones =  true;
+
+
+                //Pars5er.muestraCargaDeInstrs = false;
+                //Parser.ejecuta = false;
+                //  Tab.muestraTabSimb = Program1.form1.richTextBox10.Visible = false;
+                Program1.form1.treeView1.ExpandAll();
+            }
+        }
 
         private void árbolDeDerivaciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1442,6 +1474,7 @@ namespace at.jku.ssw.cc //Compilador //text_Box_Mio
         {
 
         }
+        
 
 
     }
