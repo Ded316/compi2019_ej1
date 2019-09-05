@@ -345,7 +345,7 @@ public class Scanner {
     }
     static void ReadName(Token t)
     {
-        while ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9') || ch == '_')
+        while ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || ch == '_')
         {
             t.str = t.str+ch;
             NextCh();
